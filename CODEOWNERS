@@ -1,0 +1,16 @@
+# Global owners
+*       @FTHTrading
+
+# Frontend / Next.js Routing
+/apps/web/               @FTHTrading
+
+# Backend & Database
+/packages/db/            @FTHTrading
+/packages/audit/         @FTHTrading
+/packages/core/          @FTHTrading
+
+# Configuration & DevOps
+/.github/workflows/      @FTHTrading
+/packages/config/        @FTHTrading
+/turbo.json              @FTHTrading
+/pnpm-workspace.yaml     @FTHTrading

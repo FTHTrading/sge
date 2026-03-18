@@ -1,0 +1,141 @@
+[
+  {
+    "_comment": "VERIFIED via runtime truth pass — see TRUTH-PASS.md",
+    "_contract_status": "DRAINED — 0 SGE balance, claims revert with 'Not enough SGE'",
+    "_etherscan_verified": false,
+    "_verification_method": "eth_call probing + bytecode PUSH4 extraction"
+  },
+  {
+    "type": "function",
+    "name": "claimWithUSDC",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "_selector": "0xf9d6d8b6",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "claimWithUSDT",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "_selector": "0x84910e5c",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "hasClaimed",
+    "inputs": [
+      { "name": "wallet", "type": "address", "internalType": "address" }
+    ],
+    "outputs": [
+      { "name": "", "type": "bool", "internalType": "bool" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0x73b2e80e",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "CLAIM_AMOUNT",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0x270ef385",
+    "_verified": true,
+    "_note": "Returns 1000 × 10^18 — this is the SGE reward, not the stablecoin price"
+  },
+  {
+    "type": "function",
+    "name": "owner",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "address", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0x8da5cb5b",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "usdcToken",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "address", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0x11eac855",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "usdtToken",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "address", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0xa98ad46c",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "sgeToken",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "address", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "_selector": "0x3ab2fa02",
+    "_verified": true,
+    "_note": "Returns 0x40489719E489782959486A04B765E1e93e5B221a"
+  },
+  {
+    "type": "function",
+    "name": "fundSGE",
+    "inputs": [
+      { "name": "amount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "_selector": "0x43b8c825",
+    "_verified": true,
+    "_note": "Owner-only — loads SGE tokens into contract for distribution"
+  },
+  {
+    "type": "function",
+    "name": "renounceOwnership",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "_selector": "0x715018a6",
+    "_verified": true
+  },
+  {
+    "type": "function",
+    "name": "transferOwnership",
+    "inputs": [
+      { "name": "newOwner", "type": "address", "internalType": "address" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "_selector": "0xf2fde38b",
+    "_verified": true
+  },
+  {
+    "type": "event",
+    "name": "Claimed",
+    "inputs": [
+      { "name": "wallet", "type": "address", "indexed": true, "internalType": "address" },
+      { "name": "token", "type": "address", "indexed": false, "internalType": "address" },
+      { "name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256" },
+      { "name": "sgeAmount", "type": "uint256", "indexed": false, "internalType": "uint256" }
+    ],
+    "anonymous": false,
+    "_verified": false,
+    "_note": "UNVERIFIED — parameter names, order, and indexing are assumed. No decoded event logs available."
+  }
+]

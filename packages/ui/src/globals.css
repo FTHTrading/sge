@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 16% 4%;
+    --foreground: 210 20% 96%;
+    --card: 220 16% 7%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 16% 7%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 155 70% 45%;
+    --primary-foreground: 220 16% 4%;
+    --secondary: 220 14% 14%;
+    --secondary-foreground: 210 20% 88%;
+    --muted: 220 14% 11%;
+    --muted-foreground: 215 16% 50%;
+    --accent: 155 60% 38%;
+    --accent-foreground: 210 20% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 96%;
+    --border: 220 14% 14%;
+    --input: 220 14% 14%;
+    --ring: 155 70% 45%;
+    --radius: 0.625rem;
+    --chart-1: 155 70% 45%;
+    --chart-2: 200 80% 50%;
+    --chart-3: 270 60% 55%;
+    --chart-4: 35 90% 55%;
+    --chart-5: 340 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-xl;
+  }
+  .glass-panel-hover {
+    @apply glass-panel hover:bg-white/[0.05] hover:border-white/[0.1] transition-all duration-300;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent;
+  }
+  .glow-sm {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+  }
+  .glow-md {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
+  }
+}
