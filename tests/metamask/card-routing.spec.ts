@@ -39,7 +39,7 @@ describe("Card Routing — URL Map", () => {
   });
 
   it("download URL should point to MetaMask download", () => {
-    expect(METAMASK_CARD_URLS.download).toContain("metamask.io");
+    expect(METAMASK_CARD_URLS.downloadMetaMask).toContain("metamask.io");
   });
 
   it("introducing URL should be a MetaMask blog/learn link", () => {
@@ -115,7 +115,7 @@ describe("Card Routing — Region routing", () => {
   it("should cover major regions", () => {
     const names = SUPPORTED_REGIONS.map((r) => r.region);
     expect(names).toContain("United States");
-    expect(names).toContain("EU / EEA");
+    expect(names).toContain("European Union / EEA");
     expect(names).toContain("United Kingdom");
   });
 });

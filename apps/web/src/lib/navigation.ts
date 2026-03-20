@@ -27,6 +27,7 @@ export const APP_NAV: NavItem[] = [
   { label: "Activation Status", href: "/activation-dashboard", icon: "ShieldCheck" },
   { label: "Claim SGE", href: "/claim-sge", icon: "Coins" },
   { label: "MetaMask Card", href: "/metamask-card", icon: "CreditCard" },
+  { label: "Operator Testing", href: "/operator-testing", icon: "Shield", roles: ["super_admin", "foundation_admin"] },
   { label: "Settings", href: "/settings", icon: "Settings", roles: ["super_admin", "foundation_admin"] },
 ];
 
@@ -38,5 +39,8 @@ export const ADMIN_NAV: NavItem[] = [
   { label: "Users", href: "/admin/users", icon: "Users", roles: ["super_admin", "foundation_admin"] },
   { label: "Organizations", href: "/admin/organizations", icon: "Building", roles: ["super_admin", "foundation_admin"] },
   { label: "SGE Config", href: "/admin/sge", icon: "Coins", roles: ["super_admin", "foundation_admin"] },
+  { label: "SGE Claims", href: "/admin/sge/claims", icon: "Wallet", roles: ["super_admin", "foundation_admin"] },
+  { label: "SGE Treasury", href: "/admin/sge/treasury", icon: "Database", roles: ["super_admin", "foundation_admin"] },
+  { label: "SGE Testing", href: "/admin/sge/testing", icon: "Terminal", roles: ["super_admin", "foundation_admin"] },
   { label: "MetaMask Card", href: "/admin/metamask-card", icon: "CreditCard", roles: ["super_admin", "foundation_admin"] },
 ];

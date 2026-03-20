@@ -9,7 +9,8 @@ import {
   Loader2,
   Wallet,
 } from "lucide-react";
-import { explorerTxUrl, shortenAddress } from "@/lib/claim";
+import { explorerTxUrl } from "@/lib/config/sge";
+import { shortenAddress } from "@/lib/web3/sgeClaim";
 
 interface ClaimRecord {
   id: string;

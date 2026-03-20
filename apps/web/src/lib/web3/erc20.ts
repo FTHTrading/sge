@@ -48,7 +48,11 @@ export async function getAllowance(
   return (contract.allowance as Function)(walletAddress, spender);
 }
 
-/** Approve spender for a given amount */
+/** Approve spender for a given amount.
+ *  USDT requires a zero-first approval pattern: if there is an existing
+ *  non-zero allowance, we must first set it to 0 before setting the new value.
+ *  See: https://github.com/Uniswap/interface/issues/7498
+ */
 export async function approveToken(
   token: SGETokenSymbol,
   amount: string = SGE_CONFIG.defaultApprovalAmount,
@@ -58,6 +62,19 @@ export async function approveToken(
   const cfg = SGE_CONFIG.tokens[token];
   const signer = await getSigner();
   const contract = new Contract(cfg.address, ERC20_ABI, signer);
+
+  // USDT requires resetting allowance to 0 before setting a new value
+  if (token === "USDT") {
+    const owner = await signer.getAddress();
+    const provider = await getProvider();
+    const readContract = new Contract(cfg.address, ERC20_ABI, provider);
+    const currentAllowance: bigint = await (readContract.allowance as Function)(owner, spender);
+    if (currentAllowance > 0n) {
+      const resetTx = await (contract.approve as Function)(spender, 0);
+      await resetTx.wait(1);
+    }
+  }
+
   const tx = await (contract.approve as Function)(spender, amount);
   return tx.hash as string;
 }

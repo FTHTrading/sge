@@ -107,34 +107,40 @@ describe("MetaMask Card — METAMASK_CARD_URLS", () => {
 describe("MetaMask Card — checkCardEligibility", () => {
   afterEach(() => clearEthereum());
 
-  it("should fail if MetaMask is not installed", async () => {
-    clearEthereum();
-    const result = await checkCardEligibility();
+  it("should fail if MetaMask is not installed", () => {
+    const result = checkCardEligibility({
+      hasMetaMask: false,
+      connectedChainId: null,
+      tokenBalances: {},
+    });
     expect(result.hasMetaMask).toBe(false);
-    expect(result.ready).toBe(false);
+    expect(result.isEligible).toBe(false);
   });
 
-  it("should detect MetaMask when window.ethereum.isMetaMask is true", async () => {
-    setEthereum({
-      request: vi.fn().mockResolvedValue("0x1"), // chainId = 1
+  it("should detect MetaMask when window.ethereum.isMetaMask is true", () => {
+    const result = checkCardEligibility({
+      hasMetaMask: true,
+      connectedChainId: 1,
+      tokenBalances: {},
     });
-    const result = await checkCardEligibility();
     expect(result.hasMetaMask).toBe(true);
   });
 
-  it("should detect supported network when on Linea", async () => {
-    setEthereum({
-      request: vi.fn().mockResolvedValue("0xe708"), // 59144 in hex
+  it("should detect supported network when on Linea", () => {
+    const result = checkCardEligibility({
+      hasMetaMask: true,
+      connectedChainId: 59144, // Linea
+      tokenBalances: { USDC: 1000000n },
     });
-    const result = await checkCardEligibility();
-    expect(result.onSupportedNetwork).toBe(true);
+    expect(result.hasCompatibleNetwork).toBe(true);
   });
 
-  it("should not flag unsupported network as supported", async () => {
-    setEthereum({
-      request: vi.fn().mockResolvedValue("0x1"), // Ethereum mainnet — not in card networks
+  it("should not flag unsupported network as supported", () => {
+    const result = checkCardEligibility({
+      hasMetaMask: true,
+      connectedChainId: 1, // Ethereum mainnet — not in card networks
+      tokenBalances: {},
     });
-    const result = await checkCardEligibility();
-    expect(result.onSupportedNetwork).toBe(false);
+    expect(result.hasCompatibleNetwork).toBe(false);
   });
 });

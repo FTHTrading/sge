@@ -102,7 +102,7 @@ export function AppSidebar({ role }: { role?: Role }) {
     ["/certifications", "/governance", "/proof-console"].includes(i.href)
   );
   const toolsNav = allAppNav.filter((i) =>
-    ["/reports", "/claim-sge", "/metamask-card", "/settings"].includes(i.href)
+    ["/reports", "/claim-sge", "/metamask-card", "/operator-testing", "/settings"].includes(i.href)
   );
 
   return (

@@ -9,6 +9,15 @@ dist/
 build/
 *.tsbuildinfo
 
+# Hardhat / Foundry
+artifacts/
+cache/
+typechain-types/
+
+# Deployment manifests (contain addresses, generated per-env)
+deployment-manifest.json
+verification-record.json
+
 # Environment
 .env
 .env.local

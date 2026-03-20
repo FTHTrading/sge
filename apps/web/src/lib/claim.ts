@@ -1,5 +1,30 @@
+// ╔═══════════════════════════════════════════════════════════════╗
+// ║  ⛔ STALE ABI — DO NOT IMPORT THIS FILE                     ║
+// ║                                                             ║
+// ║  This module contains a STALE ABI (includes `claimSGE()`   ║
+// ║  which does NOT exist on-chain). It also lacks the          ║
+// ║  `hasClaimed()` eligibility check present in the corrected  ║
+// ║  module.                                                    ║
+// ║                                                             ║
+// ║  Use instead:                                               ║
+// ║    @/lib/web3/sgeClaim   — verified ABI, full flow          ║
+// ║    @/lib/web3/erc20      — ERC-20 helpers                   ║
+// ║    @/lib/config/sge      — addresses, constants, URLs       ║
+// ║                                                             ║
+// ║  See docs/sge/TRUTH-PASS.md for evidence chain.             ║
+// ╚═══════════════════════════════════════════════════════════════╝
+
+// Hard-kill in live mode: if any remaining code accidentally imports this,
+// it will throw immediately rather than silently use the wrong ABI.
+if (process.env.NEXT_PUBLIC_DEMO_MODE !== "true") {
+  throw new Error(
+    "[FATAL] @/lib/claim.ts is DEPRECATED and contains a stale ABI. " +
+    "Import @/lib/web3/sgeClaim instead. See docs/sge/TRUTH-PASS.md."
+  );
+}
+
 // ─────────────────────────────────────────────
-// SGE Alignment OS – Onchain Claim Service
+// SGE Alignment OS – Onchain Claim Service (DEPRECATED)
 // ─────────────────────────────────────────────
 // Handles wallet connection, ERC-20 approval, claim execution,
 // transaction receipt polling, and explorer link generation.

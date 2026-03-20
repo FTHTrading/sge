@@ -26,7 +26,7 @@
 | Creator           | `0x9ffE2f6f306fB9bE0b8b9558fC4B86dc43A39Cb7`|
 | Creation Tx       | `0x3ca3b72f52466c19c8c896c932af441fef5a2f0f4455aa92d42f264524883c50` |
 | Block             | 23149816                                     |
-| Total Transactions| 4 (all from same day)                        |
+| Total Transactions| 3 (excludes creation; all from same day)     |
 | Current Balance   | 0 ETH, 0 SGE                                |
 
 ---
@@ -174,3 +174,48 @@ would need their receipt logs decoded to verify the exact event signature and in
 
 See [`/docs/sge/abi.json`](./abi.json) for the machine-readable ABI (verified selectors only).
 See [`/docs/sge/TRUTH-PASS.md`](./TRUTH-PASS.md) for full runtime truth pass evidence.
+
+---
+
+## Live Etherscan Verification (2025-01-18)
+
+### SGE Claim Contract (`0x4BFeF695…477D09`)
+- **ETH Balance:** 0 ETH
+- **SGE Balance:** 0 (drained)
+- **Verified on Etherscan:** No (bytecode only)
+- **Creator:** `0x9FfE2F6f…C43a39Cb7` — created ~216 days ago
+- **External Transactions:** 3 total (Etherscan confirms "Latest 3 from a total of 3")
+
+### SGE Token (`0x40489719…e5B221a`)
+- **Max Total Supply:** 100,000,000,000 SGE
+- **Decimals:** 18
+- **Holders:** 21,210
+- **Total Transfers:** 22,582
+- **Token Reputation:** UNKNOWN (Etherscan warning)
+- **Status:** Active, real token with broad distribution
+
+### SGE Token Flow Through Claim Contract
+| Block      | Direction | Method               | Counterparty         | SGE Amount |
+| ---------- | --------- | -------------------- | -------------------- | ---------- |
+| 23,149,827 | IN        | ERC-20 `transfer()`  | Owner → Contract     | +3,000     |
+| 23,149,961 | OUT       | `claimWithUSDT()`    | Contract → Owner     | −1,000     |
+| 23,150,036 | OUT       | `claimWithUSDC()`    | Contract → `0x941d…` | −1,000     |
+| 23,150,063 | OUT       | Transfer All Tokens  | Contract → Owner     | −1,000     |
+| —          | —         | —                    | Net balance          | **= 0**    |
+
+> Contract was funded via direct ERC-20 transfer, NOT via `fundSGE()`.
+> Both `claimWithUSDC()` and `claimWithUSDT()` executed successfully on mainnet.
+> Remaining 1,000 SGE drained via an unidentified owner function ("Transfer All Tokens").
+
+### Target Wallet (`0x1FF7251B…d89AD314E47…`)
+- **ETH Balance:** 0 ETH
+- **Token Balances:** None
+- **Transactions Sent:** N/A (never used)
+- **Funded By:** N/A
+- **Status:** Virgin wallet — never had any on-chain activity
+
+### Implications
+1. The contract **works correctly** — both claim functions executed and distributed SGE.
+2. The contract is **currently non-functional** — 0 SGE balance means all claims revert.
+3. To re-enable claims, the owner must either call `fundSGE()` or transfer SGE directly.
+4. The target wallet has never been used for settlements.
